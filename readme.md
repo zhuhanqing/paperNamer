@@ -37,3 +37,8 @@ python .\paperNamer.py -y 2018 -s arXiv -n "A Tutorial on Bayesian Optimization"
 ```python
 paper name: NO1_2018_arXiv_A_Tutorial_on_Bayesian_Optimization
 ```
+
+## TODO
+
+- how to automate the process of obtaining the paper name?
+- how to automate the process of naming the file?
