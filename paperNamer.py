@@ -19,8 +19,11 @@ parser.add_argument('--isCreate', type=bool,
                     default=False,
                     help='Create the paper database(true) or Update(false)')
 parser.add_argument('--data_dir', type=str, 
-                    default='E:/WORK/Papers/paper_db.csv',
+                    default='E:/Papers/paper_db.csv',
                     help='Directory of the paper database')
+parser.add_argument('--git_dir', type=str, 
+                    default='E:/WORK/DailyThings/paper_db.csv',
+                    help='Directory of the github paper database')
 parser.add_argument('-y','--year',type=str, 
                     default='2020',
                     help='Year of this paper')
@@ -44,7 +47,7 @@ def load_data(FLAGS, silence=False):
         sys.exit("Data file " + FLAGS.data_dir + " does not exist!")
 
     with open(FLAGS.data_dir,'r') as f:
-        data = pd.read_csv(f)
+        data = pd.read_csv(f,encoding='gb18030')
     return data                                        
 
 if __name__ == "__main__":
@@ -88,6 +91,11 @@ if __name__ == "__main__":
         
     # save file to csv    
     db.to_csv(FLAGS.data_dir,index=False)
+
+    # github dir
+
+    db_copy = db.copy()
+    db_copy.to_csv(FLAGS.git_dir,index=False)
 
     # print paper name
     paper_name = "NO"+str(row_num)+'_'+FLAGS.year+'_'+FLAGS.source+'_'+re_name
